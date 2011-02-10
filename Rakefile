@@ -32,6 +32,11 @@ begin
 
   load 'chef/tasks/chef_repo.rake'
 
+  rc = Pathname("~/.smeagol").expand_path
+  if rc.file?
+    load(rc.to_s)
+  end
+
   desc "Bundle a single cookbook for distribution"
   task :bundle_cookbook => [ :metadata ]
   task :bundle_cookbook, :cookbook do |t, args|
@@ -58,6 +63,7 @@ begin
     task :install do |t, args|
       system("chef-solo -j config/run_list.json -c config/solo.rb")
     end
+
     task :cleanup do |t, args|
       %w(mongod post mysql).each do |server_type|
         system("launchctl unload -w ~/Library/LaunchAgents/*.#{server_type}*")
