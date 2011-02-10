@@ -15,6 +15,10 @@ if repo = ENV["DOTFILES"]
   script "symlinks the dotfiles" do
     interpreter "bash"
     cwd dest
-    code "rake install"
+    code <<-EOS
+      for i in `ls`; do
+        ln -sf #{dest}/$i ~/.$i
+      done
+    EOS
   end
 end
