@@ -1,4 +1,4 @@
-script "installing http://github.com/carlhuda/janus" do
+script "installing janus" do
   repo  = ENV["JANUS_REPO"] || "git://github.com/carlhuda/janus.git"
   ref   = ENV["JANUS_REF"]  || "origin/master"
 
