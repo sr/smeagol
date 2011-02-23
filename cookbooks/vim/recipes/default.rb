@@ -11,7 +11,12 @@ script "installing janus" do
     fi
 
     cd ~/.vim
-    git fetch #{repo}
+
+    for i in `git remote`; do
+      git remote rm $i
+    done
+
+    git remote add -f origin #{repo}
     git reset --hard #{ref}
     rake
   EOS
