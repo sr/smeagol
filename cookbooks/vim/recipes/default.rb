@@ -6,8 +6,6 @@ script "installing http://github.com/carlhuda/janus" do
   code <<-EOS
     source ~/.cinderella.profile
 
-    set -e
-
     if [ ! -d ~/.vim ]; then
       git clone #{repo} ~/.vim
     fi
