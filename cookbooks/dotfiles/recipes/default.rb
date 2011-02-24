@@ -5,11 +5,9 @@ if repo = ENV["DOTFILES"]
   script "pull down dotfiles" do
     interpreter "bash"
     code <<-EOS
-      git clone #{repo} #{dest}
+      test -d #{dest} || git clone #{repo} #{dest}
       cd #{dest} && git pull origin master
     EOS
-
-    only_if { !File.directory?(dest) }
   end
 
   script "symlinks the dotfiles" do
