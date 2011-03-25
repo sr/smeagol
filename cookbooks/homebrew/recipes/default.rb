@@ -44,8 +44,13 @@ template "#{ENV['HOME']}/.cinderella.profile" do
 end
 
 %w(bash_profile bashrc zshrc).each do |config_file|
-  execute "include cinderella environment into defaults for ~/.#{config_file}" do
-    command "if [ -f ~/.#{config_file} ]; then echo 'source ~/.cinderella.profile' >> ~/.#{config_file}; fi"
+  script "include cinderella environment into defaults for ~/.#{config_file}" do
+    interpreter "bash"
+    code <<-EOS
+      if [ -f ~/.#{config_file} ]; then
+        echo "test -f ~/.cinderella.profile && source ~/.cinderella.profile" >> ~/.#{config_file}
+      fi
+    EOS
     not_if  "grep -q 'cinderella.profile' ~/.#{config_file}"
   end
 end
