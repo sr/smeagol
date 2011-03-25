@@ -43,7 +43,7 @@ template "#{ENV['HOME']}/.cinderella.profile" do
   variables({ :home => ENV['HOME'] })
 end
 
-%w(bash_profile bashrc zshrc).each do |config_file|
+%w(bash_profile bashrc zshenv).each do |config_file|
   script "include cinderella environment into defaults for ~/.#{config_file}" do
     interpreter "bash"
     code <<-EOS
