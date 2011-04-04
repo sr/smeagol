@@ -9,4 +9,7 @@ require root + "/resources/homebrew"
 require root + "/providers/homebrew"
 
 homebrew "python"
-homebrew "pip"
+
+execute "install pip" do
+  command "easy_install pip"
+end
